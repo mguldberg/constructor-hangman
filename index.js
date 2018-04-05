@@ -18,7 +18,7 @@ var continueGame = true;
 var newWordExport = new WordExport();
 
 //array of word choices for the game
-var arrayOfWordChoices = ["clapping", "window", "basketball"];
+var arrayOfWordChoices = ["clapping", "window", "basketball", "baseball", "spring", "boating-is-fun"];
 
 // Randomly chooses a choice from the options array. This is the Computer's selection of the hangman word.
 var hangmanWordSelected = arrayOfWordChoices[Math.floor(Math.random() * arrayOfWordChoices.length)];
@@ -65,7 +65,7 @@ function guessALetter() {
                 if (guessResult[0] == newWordExport.numLettersInTheWord) {
                     console.log("---------------You win!!--------------");
                     // display list of letters guessed 
-                    console.log("\n" + newWordExport.singleWordArray.join(" ") + "\n");
+                    console.log("\n" + newWordExport.singleWordArray.join("  ") + "\n");
 
                     // init the game
                     newWordExport = new WordExport();
@@ -105,7 +105,7 @@ function guessALetter() {
 
                 if (guessCount == maxGuesses) {
                     console.log("You Lose.  Game over");
-                    console.log("The word was: " + newWordExport.singleWordArray.join(" "));
+                    console.log("The word was: " + newWordExport.singleWordArray.join("  "));
                     return;
                 }
 
