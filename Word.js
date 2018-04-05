@@ -8,15 +8,16 @@ var Word = function () {
     this.numLettersInTheWord = 0;
     this.arrayOfLettersObjects = [];
     this.lettersGuessedCorrectly = 0;
+    this.singleWordArray = [];
 
     // An array of new Letter objects representing the letters of the underlying word
     this.createArrayOfObjects = function (underlyingWord) {
-        var singleWordArray = Array.from(underlyingWord);
-        for (i = 0; i < singleWordArray.length; i++) {
-            this.arrayOfLettersObjects.push(new letterExport(singleWordArray[i]));
+        this.singleWordArray = Array.from(underlyingWord);
+        for (i = 0; i < this.singleWordArray.length; i++) {
+            this.arrayOfLettersObjects.push(new letterExport(this.singleWordArray[i]));
             this.numLettersInTheWord++;
         }
-        console.log(this.arrayOfLettersObjects);
+        // console.log(this.arrayOfLettersObjects);
     }
 
     // A function that returns a string representing the word. This should call the function on each letter object (the first function defined in Letter.js) that displays the character or an underscore and concatenate those together.
@@ -32,23 +33,30 @@ var Word = function () {
 
     // A function that takes a character as an argument and calls the guess function on each letter object (the second function defined in Letter.js)
     this.userGuessedALetterFn = function (guessedLetter) {
-        console.log("inside the guessed letter fn");
-        console.log(this.arrayOfLettersObjects.length);
+        // console.log("inside the guessed letter fn");
+        // console.log(this.arrayOfLettersObjects.length);
+
+        var guessedBoolean = false;
 
         for (i = 0; i < this.arrayOfLettersObjects.length; i++) {
             var guessedOrNot = this.arrayOfLettersObjects[i].wasThisACorrectGuess(guessedLetter);
             if (guessedOrNot) {
                 this.lettersGuessedCorrectly++;
-                console.log("you guessed correctly");
+                guessedBoolean = true;
             }
             else {
-                console.log("sorry, that wasn't correct");
+
             }
         }
-        console.log("so far you have guessed correctly:  " + this.lettersGuessedCorrectly);
+        console.log("\n\n\nSo far you have guessed " + this.lettersGuessedCorrectly +" letters correctly.\n");
 
-        // console.log(this.arrayOfLettersObjects);
-        return this.lettersGuessedCorrectly;
+        if (guessedBoolean)
+            console.log("\nYou guessed correctly\n");
+        else
+            console.log("\nThat guess was incorrect\n");
+
+        // return the current # of letters in this word guess correctly, and if there was a successful guess (guessedBoolean)
+        return [this.lettersGuessedCorrectly, guessedBoolean];
     }
 
 
